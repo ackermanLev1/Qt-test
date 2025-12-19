@@ -1,0 +1,43 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/copy.jpg</file>
+        <file>img/cut.jpg</file>
+        <file>img/find.jpg</file>
+        <file>img/font.jpg</file>
+        <file>img/goto.jpg</file>
+        <file>img/line.jpg</file>
+        <file>img/logo.jpg</file>
+        <file>img/new.jpg</file>
+        <file>img/open.jpg</file>
+        <file>img/paste.jpg</file>
+        <file>img/print.jpg</file>
+        <file>img/redo.jpg</file>
+        <file>img/replace.jpg</file>
+        <file>img/save.jpg</file>
+        <file>img/saveas.jpg</file>
+        <file>img/setting.jpg</file>
+        <file>img/status.jpg</file>
+        <file>img/tool.jpg</file>
+        <file>img/undo.jpg</file>
+        <file>img/wrap.jpg</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/bianjiqi.jpg</file>
+        <file>C:/Users/levi1/Downloads/img (2).zip</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/selceltall.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/bar2.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/bar.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/wrap.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/font.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/replace.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/find.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/paste.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/redo.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/copy.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/cut.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/undo.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/exit.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/saveas.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/new.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/save.png</file>
+        <file>C:/Users/levi1/Downloads/img (2)/img/open.png</file>
+    </qresource>
+</RCC>
