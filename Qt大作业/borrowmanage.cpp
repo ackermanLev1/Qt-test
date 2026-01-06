@@ -1,4 +1,3 @@
-// borrowmanage.cpp（核心函数）
 #include "borrowmanage.h"
 #include "ui_borrowmanage.h"
 #include <QMessageBox>
@@ -27,6 +26,13 @@ BorrowManage::BorrowManage(DatabaseManager *dbManager, QWidget *parent) :
     connect(ui->btnRefreshBorrow, &QPushButton::clicked, this, &BorrowManage::onBtnRefreshBorrowClicked);
     connect(ui->cbxStatus, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this, &BorrowManage::onCbxStatusCurrentIndexChanged);
     refreshBorrowList();
+}
+
+// 核心修改：实现析构函数
+BorrowManage::~BorrowManage()
+{
+    delete ui; // 释放UI资源
+    delete m_borrowModel; // 释放模型资源（避免内存泄漏）
 }
 
 void BorrowManage::refreshBorrowList(int status)

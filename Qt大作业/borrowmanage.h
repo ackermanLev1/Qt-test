@@ -1,4 +1,3 @@
-// borrowmanage.h（简化版）
 #ifndef BORROWMANAGE_H
 #define BORROWMANAGE_H
 
@@ -16,7 +15,7 @@ class BorrowManage : public QWidget
 
 public:
     explicit BorrowManage(DatabaseManager *dbManager, QWidget *parent = nullptr);
-    ~BorrowManage();
+    ~BorrowManage(); // 原代码已声明，无需修改，但需在.cpp中实现
     void refreshBorrowList(int status = -1); // -1=全部，0=未还，1=已还
 
 private slots:
