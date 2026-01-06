@@ -1,4 +1,3 @@
-// readermanage.h（简化版）
 #ifndef READERMANAGE_H
 #define READERMANAGE_H
 
@@ -21,17 +20,13 @@ class ReaderManage : public QWidget
 
 public:
     explicit ReaderManage(DatabaseManager *dbManager, QWidget *parent = nullptr);
-    ~ReaderManage();
+    ~ReaderManage(); // 原代码已声明，无需修改，但需在.cpp中实现
     void refreshReaderList(const QString &keyword = "");
 
 private slots:
     void onBtnAddReaderClicked();
-
-
     void on_btnSearchReader_clicked();
-
     void on_btnDeleteReader_clicked();
-
     void on_btnRefreshReader_clicked();
 
 private:

@@ -1,4 +1,3 @@
-// readermanage.cpp（核心函数）
 #include "readermanage.h"
 #include "ui_readermanage.h"
 #include <QMessageBox>
@@ -22,6 +21,13 @@ ReaderManage::ReaderManage(DatabaseManager *dbManager, QWidget *parent) :
     connect(ui->btnRefreshReader, &QPushButton::clicked, this, &ReaderManage::on_btnRefreshReader_clicked);
 
     refreshReaderList();
+}
+
+// 核心修改：实现析构函数
+ReaderManage::~ReaderManage()
+{
+    delete ui; // 释放UI资源
+    delete m_readerModel; // 释放模型资源（避免内存泄漏）
 }
 
 void ReaderManage::refreshReaderList(const QString &keyword)
@@ -78,7 +84,6 @@ void ReaderManage::on_btnDeleteReader_clicked()
     int row = currentIndex.row();
     QString readerId = m_readerModel->data(m_readerModel->index(row, 0)).toString();
 
-
     // 3. 二次确认删除
     QMessageBox::StandardButton reply = QMessageBox::question(
         this, "确认删除",
@@ -88,7 +93,6 @@ void ReaderManage::on_btnDeleteReader_clicked()
     if (reply != QMessageBox::Yes) {
         return; // 用户取消操作
     }
-
 
     // 4. 调用DatabaseManager删除数据库中的读者
     bool deleteSuccess = m_dbManager->deleteReader(readerId);
