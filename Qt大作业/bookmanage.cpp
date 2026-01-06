@@ -38,13 +38,13 @@ void BookManage::refreshBookList(const QString &keyword)
     // 从数据库获取数据并更新 Model
     QSqlQueryModel * newModel = m_dbManager->getBookList(keyword);
     m_bookModel->setQuery(newModel->query());
-    m_bookModel->setHeaderData(newModel->headerData(0, Qt::Horizontal), Qt::Horizontal, "图书ID");
-    m_bookModel->setHeaderData(newModel->headerData(1, Qt::Horizontal), Qt::Horizontal, "图书名称");
-    m_bookModel->setHeaderData(newModel->headerData(2, Qt::Horizontal), Qt::Horizontal, "作者");
-    m_bookModel->setHeaderData(newModel->headerData(3, Qt::Horizontal), Qt::Horizontal, "出版社");
-    m_bookModel->setHeaderData(newModel->headerData(4, Qt::Horizontal), Qt::Horizontal, "出版日期");
-    m_bookModel->setHeaderData(newModel->headerData(5, Qt::Horizontal), Qt::Horizontal, "分类");
-    m_bookModel->setHeaderData(newModel->headerData(6, Qt::Horizontal), Qt::Horizontal, "库存");
+    m_bookModel->setHeaderData(0, Qt::Horizontal, "图书ID");
+    m_bookModel->setHeaderData(1, Qt::Horizontal, "图书名称");
+    m_bookModel->setHeaderData(2, Qt::Horizontal, "作者");
+    m_bookModel->setHeaderData(3, Qt::Horizontal, "出版社");
+    m_bookModel->setHeaderData(4, Qt::Horizontal, "出版日期");
+    m_bookModel->setHeaderData(5, Qt::Horizontal, "分类");
+    m_bookModel->setHeaderData(6, Qt::Horizontal, "库存");
     delete newModel; // 释放临时 Model
 }
 
