@@ -72,71 +72,27 @@
      </property>
      <widget class="QWidget" name="pagePersonalInfo">
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_3"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>联系电话:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>性别:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="lineEdit_5"/>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>读者ID:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0" colspan="2">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>修改个人信息</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QLineEdit" name="lineEdit_4"/>
-       </item>
-       <item row="5" column="2">
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>修改密码</string>
-         </property>
-        </widget>
-       </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="label_6">
+        <widget class="QLabel" name="lblRegisterTime">
          <property name="text">
           <string>注册时间:</string>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>姓名:</string>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_2"/>
+       <item row="3" column="0">
+        <widget class="QLabel" name="lblReaderPhone">
+         <property name="text">
+          <string>联系电话:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
        </item>
-       <item row="6" column="1">
+       <item row="7" column="1">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -148,6 +104,16 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="lblReaderGender">
+         <property name="text">
+          <string>性别:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
        </item>
        <item row="5" column="3">
         <spacer name="horizontalSpacer_2">
@@ -162,6 +128,20 @@
          </property>
         </spacer>
        </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QPushButton" name="btnModifyInfo">
+         <property name="text">
+          <string>修改个人信息</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="leRegisterTime">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="2" colspan="2">
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -174,6 +154,64 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="5" column="2">
+        <widget class="QPushButton" name="btnModifyPwd">
+         <property name="text">
+          <string>修改密码</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="leReaderName">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="leReaderPhone">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="lblReaderID">
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>读者ID:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lblReaderName">
+         <property name="text">
+          <string>姓名:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="leReaderID">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="leReaderGender">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -208,22 +246,21 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="btnReturnBook">
-           <property name="text">
-            <string>归还</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
-        <widget class="QTableView" name="tableView"/>
+        <widget class="QTableView" name="tableViewBookBorrow"/>
        </item>
        <item>
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="lblOverdueTips">
+         <property name="font">
+          <font>
+           <family>Agency FB</family>
+           <pointsize>15</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>逾期提醒（红色字体）</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -260,6 +297,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="btnReturnBook">
+           <property name="text">
+            <string>归还</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -275,7 +319,7 @@
         </layout>
        </item>
        <item>
-        <widget class="QTableView" name="tableViewBorrow">
+        <widget class="QTableView" name="tableViewReaderBorrow">
          <property name="minimumSize">
           <size>
            <width>0</width>
