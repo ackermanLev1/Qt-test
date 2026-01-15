@@ -31,14 +31,14 @@ ReaderView::ReaderView(const QString& readerId, QWidget *parent)
     ui->cbxStatus->setCurrentIndex(0);
     connect(ui->cbxStatus, &QComboBox::currentTextChanged, this, &ReaderView::on_cbxStatus_currentTextChanged);
 
+    // 初始化对话框
+    initPwdDialog();
+    initInfoDialog();
+
     // 初始化默认页面（个人信息）
     updatePersonalInfo();
     initBookBorrowModel();
     ui->stackedWidget->setCurrentWidget(ui->pagePersonalInfo);
-
-    // 初始化对话框
-    initPwdDialog();
-    initInfoDialog();
 
     // 检查逾期
     QString overdue = DataBaseManager::getInstance()->checkOverdue(readerId);
