@@ -134,7 +134,7 @@ void ReaderView::initPwdDialog() {
     btnLayout->addWidget(btnPwdCancel);
     pwdLayout->addLayout(btnLayout, 3, 0, 1, 2, Qt::AlignCenter);
 
-    // 密码修改逻辑（增加旧密码校验）
+    // 密码修改逻辑（增加校验）
     connect(btnPwdOk, &QPushButton::clicked, this, [=]() {
         QString oldPwd = leOldPwd->text().trimmed();
         QString newPwd = leNewPwd->text().trimmed();
@@ -154,13 +154,20 @@ void ReaderView::initPwdDialog() {
             return;
         }
 
-        // 验证旧密码（关键修复：原代码未校验旧密码）
+        // 修复：获取读者的username（而非name）进行登录验证
+        QString readerUsername = DataBaseManager::getInstance()->getReaderUsername(readerId);
+        if (readerUsername.isEmpty()) {
+            QMessageBox::warning(pwdDialog, "警告", "读者信息不存在！");
+            return;
+        }
+        // 验证旧密码
         QString tempUserId;
         bool isExist;
         int loginResult = DataBaseManager::getInstance()->loginVerify(
-            DataBaseManager::getInstance()->getPersonalInfo(readerId).next() ?
-            DataBaseManager::getInstance()->getPersonalInfo(readerId).value("name").toString() : "",
-            oldPwd, tempUserId, isExist
+            readerUsername,  // 正确使用username（如reader2）
+            oldPwd,
+            tempUserId,
+            isExist
         );
         if (loginResult != 1) {
             QMessageBox::warning(pwdDialog, "警告", "旧密码输入错误！");
@@ -300,7 +307,7 @@ void ReaderView::on_btnBorrowBook_clicked() {
 
     // 输入借阅天数（1-30天）
     bool ok;
-    int borrowDays = QInputDialog::getInt(this, "借阅天数", "请输入借阅天数（1-30天）：", 14, 1, 30, 1, &ok);
+    int borrowDays = QInputDialog::getInt(this, "借阅天数", "请输入借阅天数（1-30天）：",1, 1, 30, 1, &ok);
     if (!ok) return;
 
     // 调用借阅接口
