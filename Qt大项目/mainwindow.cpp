@@ -1,110 +1,81 @@
-#include "MainWindow.h"
-#include "ui_MainWindow.h"
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QDebug>
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-      ui(new Ui::MainWindow),
-      loginView(nullptr),
-      adminView(nullptr),
-      readerView(nullptr) {
-
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    this->setWindowTitle("图书借阅管理系统");
-    this->setMinimumSize(800, 600);
+    // 窗口基础设置
+    this->setWindowTitle("图书与借阅管理系统");
+    this->setWindowIcon(QIcon(":/icons/book.ico")); // 可选：添加窗口图标
 
-    // 创建中心部件
-    QWidget *centralWidget = new QWidget(this);
-    QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
-    centralWidget->setLayout(mainLayout);
+    // 初始化中心部件和布局
+    centralWidget = new QWidget(this);
+    mainLayout = new QVBoxLayout(centralWidget);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
     this->setCentralWidget(centralWidget);
 
     // 初始化数据库
     if (!DataBaseManager::getInstance()->initDataBase()) {
-        QMessageBox::critical(this, "错误", "数据库初始化失败，程序即将退出！");
+        QMessageBox::critical(this, "致命错误", "数据库初始化失败，程序即将退出！");
         qApp->quit();
         return;
     }
 
-    // 显示登录界面
-    showLoginView();
+    // 初始化登录界面
+    loginView = new LoginView();
+    adminView = nullptr;
+    readerView = nullptr;
+    mainLayout->addWidget(loginView);
+
+    // 连接信号槽
+    connect(loginView, &LoginView::loginSuccess, this, &MainWindow::handleLoginSuccess);
+    connect(loginView, &LoginView::returnToMain, this, &MainWindow::handleReturnToMain);
 }
 
 MainWindow::~MainWindow() {
-    cleanupUserView();
-    delete loginView;
     delete ui;
-}
-
-void MainWindow::showLoginView() {
-    // 清理当前视图
-    cleanupUserView();
-
-    // 创建登录视图
-    if (!loginView) {
-        loginView = new LoginView();
-        connect(loginView, &LoginView::loginSuccess, this, &MainWindow::handleLoginSuccess);
-        connect(loginView, &LoginView::returnToMain, this, &MainWindow::handleReturnToMain);
-    }
-
-    // 添加到主布局
-    QLayout *layout = centralWidget()->layout();
-    QLayoutItem *item;
-    while ((item = layout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-
-    layout->addWidget(loginView);
-    loginView->show();
-}
-
-void MainWindow::showUserView(int userType, const QString& userId) {
-    // 清理当前视图
-    QLayout *layout = centralWidget()->layout();
-    QLayoutItem *item;
-    while ((item = layout->takeAt(0)) != nullptr) {
-        if (item->widget() == loginView) {
-            layout->removeWidget(loginView);
-            loginView->hide();
-        }
-        delete item;
-    }
-
-    // 根据用户类型创建相应视图
-    if (userType == 2) { // 管理员
-        adminView = new AdminView(userId);
-        connect(adminView, &AdminView::logout, this, &MainWindow::handleLogout);
-        layout->addWidget(adminView);
-    } else if (userType == 1) { // 读者
-        readerView = new ReaderView(userId);
-        connect(readerView, &ReaderView::logout, this, &MainWindow::handleLogout);
-        layout->addWidget(readerView);
-    }
-}
-
-void MainWindow::cleanupUserView() {
-    if (adminView) {
-        adminView->deleteLater();
-        adminView = nullptr;
-    }
-    if (readerView) {
-        readerView->deleteLater();
-        readerView = nullptr;
-    }
+    delete loginView;
+    delete adminView;
+    delete readerView;
 }
 
 void MainWindow::handleLoginSuccess(int userType, const QString& userId) {
-    showUserView(userType, userId);
+    // 隐藏并移除登录界面
+    loginView->hide();
+    mainLayout->removeWidget(loginView);
+
+    // 根据用户类型创建对应界面
+    if (userType == 2) { // 管理员
+        adminView = new AdminView(userId);
+        mainLayout->addWidget(adminView);
+        connect(adminView, &AdminView::logout, this, &MainWindow::handleLogout);
+    } else if (userType == 1) { // 读者
+        readerView = new ReaderView(userId);
+        mainLayout->addWidget(readerView);
+        connect(readerView, &ReaderView::logout, this, &MainWindow::handleLogout);
+    }
 }
 
 void MainWindow::handleLogout() {
-    showLoginView();
+    // 移除当前用户界面
+    if (adminView) {
+        mainLayout->removeWidget(adminView);
+        delete adminView;
+        adminView = nullptr;
+    } else if (readerView) {
+        mainLayout->removeWidget(readerView);
+        delete readerView;
+        readerView = nullptr;
+    }
+
+    loginView->clearPasswordInput();
+
+    // 显示登录界面
+    mainLayout->addWidget(loginView);
+    loginView->show();
 }
 
 void MainWindow::handleReturnToMain() {
-    showLoginView();
+    // 直接显示登录界面（清空输入）
+    loginView->show();
+
 }

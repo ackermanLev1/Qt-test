@@ -37,6 +37,7 @@ private slots:
     void on_cbxStatus_currentTextChanged(const QString &text);
     void on_btnRefreshBorrow_clicked();
 
+
 private:
     Ui::AdminView *ui;
     QString adminId;

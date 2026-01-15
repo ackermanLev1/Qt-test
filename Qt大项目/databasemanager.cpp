@@ -438,6 +438,16 @@ QSqlQuery DataBaseManager::getPersonalInfo(const QString& readerId) {
     return query;
 }
 
+QString DataBaseManager::getReaderUsername(const QString& readerId) {
+    QSqlQuery query;
+    query.prepare("SELECT username FROM user_Reader WHERE readerId=?");
+    query.addBindValue(readerId);
+    if (query.exec() && query.next()) {
+        return query.value("username").toString();
+    }
+    return "";
+}
+
 bool DataBaseManager::modifyPwd(const QString& userId, const QString& newPwd, bool isAdmin) {
     QSqlQuery query;
     QString table = isAdmin ? "user_Admin" : "user_Reader";

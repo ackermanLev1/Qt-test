@@ -146,3 +146,7 @@ void LoginView::on_btnLogin_clicked() {
 void LoginView::on_btnRegister_clicked() {
     registerDialog->exec();
 }
+
+void LoginView::clearPasswordInput() {
+    ui->lePwd->clear();
+}

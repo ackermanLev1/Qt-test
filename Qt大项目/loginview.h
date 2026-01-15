@@ -19,6 +19,8 @@ public:
     explicit LoginView(QWidget *parent = nullptr);
     ~LoginView();
 
+    void clearPasswordInput();
+
 signals:
     // 登录成功（1-读者，2-管理员；用户ID）
     void loginSuccess(int userType, const QString& userId);

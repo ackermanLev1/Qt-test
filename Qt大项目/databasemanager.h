@@ -35,6 +35,7 @@ public:
     bool returnBook(const QString& borrowId);
     // 个人信息接口
     QSqlQuery getPersonalInfo(const QString& readerId);
+    QString getReaderUsername(const QString& readerId);
     bool modifyPwd(const QString& userId, const QString& newPwd, bool isAdmin = false);
     bool modifyPersonalInfo(const QString& readerId, const QString& name, const QString& gender, const QString& phone);
     // 逾期检查
