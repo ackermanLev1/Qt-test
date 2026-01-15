@@ -6,13 +6,13 @@
 LoginView::LoginView(QWidget *parent) : QWidget(parent), ui(new Ui::LoginView) {
     ui->setupUi(this);
     // 初始化角色下拉框
-    ui->cbRole->addItem("管理员");
     ui->cbRole->addItem("读者");
+    ui->cbRole->addItem("管理员");
+
     // 管理员模式禁用注册按钮
     connect(ui->cbRole, &QComboBox::currentTextChanged, this, [=](const QString& text) {
         ui->btnRegister->setEnabled(text == "读者");
     });
-    ui->btnRegister->setEnabled(false); // 默认选中管理员
 
     // 初始化注册对话框
     initRegisterDialog();
@@ -145,15 +145,4 @@ void LoginView::on_btnLogin_clicked() {
 
 void LoginView::on_btnRegister_clicked() {
     registerDialog->exec();
-}
-
-void LoginView::on_btnReturn_clicked() {
-    emit returnToMain();
-    this->hide();
-}
-
-void LoginView::on_btnLogout_clicked() {
-    ui->leUser->clear();
-    ui->lePwd->clear();
-    ui->cbRole->setCurrentIndex(0);
 }

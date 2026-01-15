@@ -203,8 +203,6 @@ void ReaderView::initInfoDialog() {
     infoLayout->addWidget(new QLabel("联系电话:"), 2, 0, Qt::AlignRight);
     leInfoPhone = new QLineEdit();
     leInfoPhone->setPlaceholderText("请输入11位手机号");
-    leInfoPhone->setMaxLength(11);
-    leInfoPhone->setValidator(new QIntValidator(this));
     infoLayout->addWidget(leInfoPhone, 2, 1);
 
     // 按钮

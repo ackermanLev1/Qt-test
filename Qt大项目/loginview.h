@@ -27,8 +27,6 @@ signals:
 private slots:
     void on_btnLogin_clicked();
     void on_btnRegister_clicked();
-    void on_btnReturn_clicked();
-    void on_btnLogout_clicked();
 
 private:
     Ui::LoginView *ui;
