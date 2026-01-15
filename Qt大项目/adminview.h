@@ -1,12 +1,14 @@
 #ifndef ADMINVIEW_H
 #define ADMINVIEW_H
-
 #include <QWidget>
 #include <QSqlQueryModel>
 #include <QDialog>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QDateEdit>
+#include <QComboBox>
+#include <QHeaderView>
+#include "databasemanager.h"
 
 namespace Ui {
 class AdminView;
@@ -14,7 +16,6 @@ class AdminView;
 
 class AdminView : public QWidget {
     Q_OBJECT
-
 public:
     explicit AdminView(const QString& adminId, QWidget *parent = nullptr);
     ~AdminView();
@@ -33,9 +34,7 @@ private slots:
     void on_btnDeleteBook_clicked();
     void on_btnSearchReader_clicked();
     void on_btnDeleteReader_clicked();
-    void on_btnAllBorrow_clicked();
-    void on_btnUnreturned_clicked();
-    void on_btnReturned_clicked();
+    void on_cbxStatus_currentTextChanged(const QString &text);
     void on_btnRefreshBorrow_clicked();
 
 private:
@@ -44,7 +43,6 @@ private:
     QSqlQueryModel* bookModel;
     QSqlQueryModel* readerModel;
     QSqlQueryModel* borrowModel;
-    // 添加/修改图书对话框
     QDialog* bookDialog;
     QLineEdit* leBookId;
     QLineEdit* leBookName;
@@ -55,11 +53,13 @@ private:
     QLineEdit* leBookStock;
     QPushButton* btnBookOk;
     QPushButton* btnBookCancel;
-    bool isModifyMode; // 是否为修改模式
+    bool isModifyMode;
 
     void initBookModel(const QString& searchKey = "");
     void initReaderModel(const QString& searchKey = "");
-    void initBorrowModel(const QString& type = "all");
+    void initBorrowModel(const QString& status = "全部记录");
+    void initBookDialog();
+    void initBorrowStatusCombo();
 };
 
 #endif // ADMINVIEW_H
